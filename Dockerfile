@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+
 SHELL ["/bin/bash", "-c"]
 
 
@@ -62,14 +63,12 @@ RUN cd ~/create_ws && catkin init && \
     cd ~/create_ws/src && \
     git clone https://github.com/autonomylab/create_robot.git && \
     cd ~/create_ws && \
-    rosdep update 
-    
-    
-     #&& \
-    # ./opt/ros/kinetic/setup.bash && \
-    # rosdep install --from-paths src -i   && \
-    # cd ~/create_ws && \
-    # catkin build && \
-    # usermod -a -G dialout $USER
+    rosdep update
+RUN source /opt/ros/kinetic/setup.bash && \
+    cd ~/create_ws && \
+    rosdep install -y --from-paths src -i   && \
+    cd ~/create_ws && \
+    catkin build
+
 
 
