@@ -52,7 +52,7 @@ RUN rosdep update
 
 #Install create_autonomy
 #https://github.com/AutonomyLab/create_robot
-RUN apt-get -y install python-rosdep python-catkin-tools
+RUN apt-get -y install python-rosdep python-catkin-tools cmake
 RUN apt-get -y install git
 RUN cd ~
 RUN mkdir -p ~/create_ws/src
@@ -62,10 +62,14 @@ RUN cd ~/create_ws && catkin init && \
     cd ~/create_ws/src && \
     git clone https://github.com/autonomylab/create_robot.git && \
     cd ~/create_ws && \
-    rosdep update && \
-    rosdep install --from-paths src -i && \
-    cd ~/create_ws && \
-    catkin build && \
-    usermod -a -G dialout $USER
+    rosdep update 
+    
+    
+     #&& \
+    # ./opt/ros/kinetic/setup.bash && \
+    # rosdep install --from-paths src -i   && \
+    # cd ~/create_ws && \
+    # catkin build && \
+    # usermod -a -G dialout $USER
 
 
