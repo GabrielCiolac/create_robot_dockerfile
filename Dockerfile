@@ -79,9 +79,20 @@ RUN cd ~/ && \
     cp .bashrc ~/.bashrc && \
     cp .bash_aliases ~/.bash_aliases
 
-RUN apt-get -y install python3-pip
+#Update Python
+RUN apt-get -y install build-essential libpq-dev libssl-dev openssl libffi-dev zlib1g-dev && \
+    add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get -y install python3-pip python3.7-dev && \
+    apt-get -y install python3.7 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+
+RUN pip3 install --upgrade pip
+
+
 RUN yes | pip3 install virtualenv
 RUN yes | pip3 install virtualenvwrapper
+
 
 
 
